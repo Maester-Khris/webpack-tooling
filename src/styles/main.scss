@@ -1,0 +1,14 @@
+$primary-color: #2fa8cc;
+$secondary-color: #f4f4f4;
+
+*{
+    box-sizing: border-box;
+}
+body{
+    background-color: $primary-color;
+}
+.container{
+    background-color: $secondary-color;
+    border-radius: 4px;
+    padding: 10px;
+}
