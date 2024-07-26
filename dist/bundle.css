@@ -1,0 +1,31 @@
+/*!***********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./src/styles/main.scss ***!
+  \***********************************************************************************************************************************************************************/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #2fa8cc;
+}
+
+.container {
+  background-color: #f4f4f4;
+  border-radius: 4px;
+  padding: 10px;
+}
+/*!************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./src/styles/fonts.scss ***!
+  \************************************************************************************************************************************************************************/
+@font-face {
+  font-family: "Playwrite HR Lijeva";
+  font-style: normal;
+  font-weight: 100 400;
+  font-display: swap;
+  src: local(""), url(playwrite.woff2) format("woff2");
+}
+.cool-text {
+  font-family: "Playwrite HR Lijeva";
+}
+
+/*# sourceMappingURL=bundle.css.map*/

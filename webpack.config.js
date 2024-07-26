@@ -1,12 +1,18 @@
 const path = require ("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const basePath = './';
 
 // can be used to set single or multiple entry point
 module.exports = {
     mode: "development",
     entry: {
-        bundle: path.resolve(__dirname, 'src/index.js')
+        bundle: path.resolve(__dirname, 'src/index.js'),
+        'playwrite': basePath + 'src/styles/fonts.scss',
+        fa: '@fortawesome/fontawesome-free/scss/fontawesome.scss',
     },
     output:{
         path: path.resolve(__dirname, 'dist'),
@@ -25,11 +31,38 @@ module.exports = {
         compress: true,
         historyApiFallback: true,
     }, 
+    optimization: {
+        minimizer: [new TerserJSPlugin({
+            parallel: true
+        })],
+        splitChunks: {
+            chunks: 'all',
+        },
+    },
     module:{
         rules:[
+            // {
+            //     test: /\.scss$/,  //take a regular expression as paraam to indicate file type based on extensions
+            //     use: ['style-loader', 'css-loader', 'sass-loader']
+            // },
             {
-                test: /\.scss$/,  //take a regular expression as paraam to indicate file type based on extensions
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                test: /\.(css|scss)$/,
+                use: [
+                  MiniCssExtractPlugin.loader,
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      importLoaders: 2,
+                      sourceMap: true,
+                    },
+                  },
+                  {
+                    loader: 'sass-loader',
+                    options: {
+                      sourceMap: true,
+                    },
+                  },
+                ],
             },
             {
                 test: /\.js$/,
@@ -43,7 +76,11 @@ module.exports = {
             },{
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: 'asset/resource'
-            }
+            }, 
+            {
+                test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
+                type: 'asset/resource'
+            },
         ]
     },
     plugins:[  
@@ -52,6 +89,10 @@ module.exports = {
             filename: 'index.html',
             template: 'src/template.html'
         }),
-        new BundleAnalyzerPlugin()
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        }),
+        // new BundleAnalyzerPlugin(),//use to anaylye bundle file size
     ]
 }

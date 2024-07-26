@@ -1,6 +1,9 @@
 import generateJoke from "./jokers"
 import './styles/main.scss'
+import './styles/fonts.scss'
 import devops from './assets/devops.svg'
+
+
 
 
 let im = document.getElementById("mysvg")
